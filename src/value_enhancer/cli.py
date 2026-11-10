@@ -64,12 +64,13 @@ def identity(username: str, json_out: bool):
 
 @main.command()
 @click.argument("phone_number")
+@click.option("--region", default="CA", help="Default ISO 2-letter country code (default: CA for Canada)")
 @click.option("--json-out", is_flag=True, help="Output raw JSON instead of tables")
-def phone(phone_number: str, json_out: bool):
+def phone(phone_number: str, region: str, json_out: bool):
     """Analyze carrier, line type, country, and OSINT footprint of PHONE_NUMBER."""
     orchestrator = ReconOrchestrator()
     with console.status(f"[cyan]Analyzing carrier & line type for '[bold]{phone_number}[/bold]'..."):
-        report = orchestrator.scan_phone(phone_number)
+        report = orchestrator.scan_phone(phone_number, region=region)
 
     if json_out:
         click.echo(report.model_dump_json(indent=2))

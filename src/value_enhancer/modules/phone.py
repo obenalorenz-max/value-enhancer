@@ -5,6 +5,16 @@ from phonenumbers import geocoder, carrier, timezone
 from ..models import PhoneFinding
 
 
+# Alberta, Canada Area Codes & Regional Municipalities
+ALBERTA_AREA_CODES = {
+    "403": "Calgary & Southern Alberta (Red Deer, Lethbridge, Medicine Hat, Banff)",
+    "780": "Edmonton & Northern Alberta (Fort McMurray, Grande Prairie, St. Albert)",
+    "587": "Alberta Province-wide Overlay (Calgary / Edmonton)",
+    "825": "Alberta Province-wide Overlay (Calgary / Edmonton)",
+    "368": "Alberta Province-wide Overlay (Calgary / Edmonton)",
+}
+
+
 class PhoneHunter:
     """Phone number intelligence and carrier reconnaissance engine (PhoneInfoga style)."""
 
@@ -31,11 +41,11 @@ class PhoneHunter:
         ]
         return links
 
-    def scan(self, raw_input: str, default_region: str = "PH") -> PhoneFinding:
+    def scan(self, raw_input: str, default_region: str = "CA") -> PhoneFinding:
         clean_input = raw_input.strip()
 
         try:
-            # Parse with optional default region fallback if no international prefix
+            # Parse with default region CA (Canada / Alberta)
             parsed = phonenumbers.parse(clean_input, default_region)
             is_valid = phonenumbers.is_valid_number(parsed)
             is_possible = phonenumbers.is_possible_number(parsed)
@@ -53,6 +63,14 @@ class PhoneHunter:
 
             # Extract location description
             geo_desc = geocoder.description_for_number(parsed, "en") or None
+
+            # Deep Alberta Area Code Localization
+            national_digits = str(parsed.national_number)
+            if country_code == 1 and len(national_digits) == 10:
+                npa = national_digits[:3]
+                if npa in ALBERTA_AREA_CODES:
+                    ab_details = ALBERTA_AREA_CODES[npa]
+                    geo_desc = f"{geo_desc or 'Alberta'} • {ab_details}"
 
             # Extract carrier details
             carrier_name = carrier.name_for_number(parsed, "en") or None

@@ -56,9 +56,9 @@ class ReconOrchestrator:
         )
         return report
 
-    def scan_phone(self, phone_number: str) -> IntelligenceReport:
+    def scan_phone(self, phone_number: str, region: str = "CA") -> IntelligenceReport:
         start_time = time.monotonic()
-        finding = self.phone_hunter.scan(phone_number)
+        finding = self.phone_hunter.scan(phone_number, default_region=region)
         duration = round(time.monotonic() - start_time, 2)
 
         risk_score = 10

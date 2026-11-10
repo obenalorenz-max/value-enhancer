@@ -36,11 +36,13 @@ def test_secret_hunter():
 
 def test_phone_hunter():
     hunter = PhoneHunter()
-    # Test international number (Google US HQ)
-    res = hunter.scan("+1 650-253-0000")
+    # Test Alberta Calgary number
+    res = hunter.scan("403-268-2489")
     assert res.valid is True
     assert res.country_code == 1
-    assert res.e164 == "+16502530000"
+    assert res.e164 == "+14032682489"
+    assert "Calgary" in (res.location or "")
+    assert "America/Edmonton" in (res.timezone or "")
     assert len(res.google_dorks) > 0
 
 
