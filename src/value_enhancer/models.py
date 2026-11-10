@@ -21,6 +21,12 @@ class IdentityFinding(BaseModel):
     status_code: int
     response_time_ms: float
     category: str = "general"
+    name: Optional[str] = None
+    bio: Optional[str] = None
+    avatar_url: Optional[str] = None
+    location: Optional[str] = None
+    extracted_links: List[str] = Field(default_factory=list)
+    extracted_handles: List[str] = Field(default_factory=list)
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
 
@@ -67,6 +73,12 @@ class DomainFinding(BaseModel):
     spf_record: Optional[str] = None
     dmarc_record: Optional[str] = None
     email_spoofable: bool = False
+    dmarc_grade: str = "Unknown"
+    cloud_provider: Optional[str] = None
+    server_banner: Optional[str] = None
+    security_headers: Dict[str, bool] = Field(default_factory=dict)
+    exposed_emails: List[str] = Field(default_factory=list)
+    cert_transparency_subdomains: List[str] = Field(default_factory=list)
     discovered_subdomains: List[str] = Field(default_factory=list)
 
 

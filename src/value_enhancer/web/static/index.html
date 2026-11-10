@@ -46,9 +46,9 @@
         </div>
         <div>
           <h1 class="font-bold text-lg tracking-wider text-white flex items-center gap-2">
-            VALUE-ENHANCER <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">v0.1.0</span>
+            VALUE-ENHANCER <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">v0.2.0 Level 50</span>
           </h1>
-          <p class="text-xs text-slate-400">Unified Digital Reconnaissance & OSINT Intelligence Suite</p>
+          <p class="text-xs text-slate-400">Maigret & theHarvester Unified OSINT Engine (Alberta & Global)</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -70,22 +70,22 @@
           <button onclick="switchTab('identity')" id="tab-identity" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
             <i class="fa-solid fa-fingerprint w-5 text-center text-base"></i>
             <div class="text-left">
-              <div>Identity Hunter</div>
-              <div class="text-xs text-slate-400 font-normal">Maigret / Sherlock style multi-platform scanner</div>
+              <div>Identity Hunter (Maigret)</div>
+              <div class="text-xs text-slate-400 font-normal">Deep profile scraper, avatars, bios & cross-links</div>
             </div>
           </button>
           <button onclick="switchTab('phone')" id="tab-phone" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
             <i class="fa-solid fa-phone-volume w-5 text-center text-base"></i>
             <div class="text-left">
               <div>Carrier & Phone Recon</div>
-              <div class="text-xs text-slate-400 font-normal">PhoneInfoga carrier & line type analysis</div>
+              <div class="text-xs text-slate-400 font-normal">Alberta 403/780/587 & Canadian telephony</div>
             </div>
           </button>
           <button onclick="switchTab('domain')" id="tab-domain" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
             <i class="fa-solid fa-globe w-5 text-center text-base"></i>
             <div class="text-left">
-              <div>Domain & Infrastructure</div>
-              <div class="text-xs text-slate-400 font-normal">theHarvester DNS, subdomains & email spoofing</div>
+              <div>Domain Recon (theHarvester)</div>
+              <div class="text-xs text-slate-400 font-normal">Cert Transparency logs, cloud & email harvesting</div>
             </div>
           </button>
           <button onclick="switchTab('secrets')" id="tab-secrets" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
@@ -112,6 +112,7 @@
           <span class="text-cyan-400">Low-Spec Optimized</span>
         </div>
         <p>Runs asynchronously in user space with minimal memory overhead (&lt;60MB RAM). Safe for low-spec Windows 11 hardware.</p>
+        <p class="text-slate-500 pt-1 border-t border-slate-800">Automated reports saved to <code class="text-cyan-400">reports/</code> directory.</p>
       </div>
     </div>
 
@@ -121,19 +122,19 @@
       <!-- Dynamic Input Card -->
       <div class="card-glass rounded-xl p-6">
         <h2 id="view-title" class="text-lg font-bold text-white mb-1 flex items-center gap-2">
-          <i class="fa-solid fa-fingerprint text-cyan-400"></i> Identity Hunter
+          <i class="fa-solid fa-fingerprint text-cyan-400"></i> Identity Hunter (Maigret Architecture)
         </h2>
-        <p id="view-desc" class="text-sm text-slate-400 mb-6">Enter a handle or username to search across developer, social, and technical platforms.</p>
+        <p id="view-desc" class="text-sm text-slate-400 mb-6">Enter a handle to probe 35+ developer, social, and gaming platforms, extract avatars, bios, and map the Web of Identity.</p>
 
         <!-- Form for Identity -->
         <div id="form-identity" class="tab-form space-y-4">
           <div class="flex gap-2">
             <div class="relative flex-1">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">@</span>
-              <input type="text" id="input-username" placeholder="e.g. torvalds, obenalorenz-max" class="w-full pl-8 pr-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+              <input type="text" id="input-username" placeholder="e.g. torvalds, geohot, obenalorenz-max" class="w-full pl-8 pr-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
             </div>
             <button onclick="runIdentityScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
-              <i class="fa-solid fa-bolt"></i> Scan Footprint
+              <i class="fa-solid fa-bolt"></i> Deep Profile Scan
             </button>
           </div>
         </div>
@@ -141,7 +142,7 @@
         <!-- Form for Phone -->
         <div id="form-phone" class="tab-form hidden space-y-4">
           <div class="flex gap-2">
-            <input type="text" id="input-phone" placeholder="e.g. (416) 392-2489, +1 604-822-2211" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+            <input type="text" id="input-phone" placeholder="e.g. 403-268-2489 (Calgary), 780-986-8774 (Leduc)" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
             <button onclick="runPhoneScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
               <i class="fa-solid fa-magnifying-glass"></i> Analyze Phone
             </button>
@@ -151,9 +152,9 @@
         <!-- Form for Domain -->
         <div id="form-domain" class="tab-form hidden space-y-4">
           <div class="flex gap-2">
-            <input type="text" id="input-domain" placeholder="e.g. github.com, cloudflare.com" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+            <input type="text" id="input-domain" placeholder="e.g. alberta.ca, ualberta.ca, github.com" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
             <button onclick="runDomainScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
-              <i class="fa-solid fa-network-wired"></i> Map Domain
+              <i class="fa-solid fa-network-wired"></i> Harvest Infrastructure
             </button>
           </div>
         </div>
@@ -182,7 +183,7 @@
       <!-- Loading State -->
       <div id="loading-spinner" class="hidden card-glass rounded-xl p-8 text-center space-y-3">
         <div class="w-10 h-10 border-4 border-cyan-500/30 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
-        <p class="text-sm text-cyan-400 font-medium animate-pulse">Running asynchronous reconnaissance scan...</p>
+        <p class="text-sm text-cyan-400 font-medium animate-pulse">Running asynchronous reconnaissance scan & harvesting telemetry...</p>
       </div>
 
       <!-- Results Display Container -->
@@ -203,12 +204,13 @@
 
   <script>
     let currentTab = 'identity';
+    let lastReportData = null;
 
     const tabConfig = {
-      identity: { title: 'Identity Hunter', icon: 'fa-fingerprint', desc: 'Scan digital footprint & discover public accounts matching a username.' },
-      phone: { title: 'Carrier & Phone Recon', icon: 'fa-phone-volume', desc: 'Extract carrier details, line type (VOIP vs Mobile), and Google OSINT footprint.' },
-      domain: { title: 'Domain & Infrastructure', icon: 'fa-globe', desc: 'Enumerate DNS, active subdomains, and assess email spoofability (SPF/DMARC).' },
-      secrets: { title: 'Secrets & Leaks Auditor', icon: 'fa-key', desc: 'Scan code snippets or configs for AWS keys, private certs, and high-entropy tokens.' },
+      identity: { title: 'Identity Hunter (Maigret Architecture)', icon: 'fa-fingerprint', desc: 'Scan digital footprint, scrape profile bios/avatars & discover public accounts across 35+ platforms.' },
+      phone: { title: 'Carrier & Phone Recon', icon: 'fa-phone-volume', desc: 'Extract carrier details, line type (VOIP vs Mobile), and Alberta/Canadian OSINT footprint.' },
+      domain: { title: 'Domain Recon (theHarvester Architecture)', icon: 'fa-globe', desc: 'Harvest Certificate Transparency logs, exposed corporate emails, cloud providers & DMARC spoofability.' },
+      secrets: { title: 'Secrets & Leaks Auditor', icon: 'fa-key', desc: 'Scan code snippets or configs for AWS keys, private certs, and high-entropy tokens (TruffleHog).' },
       metadata: { title: 'EXIF & GPS Harvester', icon: 'fa-location-crosshairs', desc: 'Extract hidden device specs, timestamps, and GPS coordinates from photos.' }
     };
 
@@ -239,6 +241,7 @@
     }
 
     function renderRiskBanner(report) {
+      lastReportData = report;
       const banner = document.getElementById('risk-banner');
       const score = report.risk_score || 0;
       let colorClass = 'border-emerald-500 text-emerald-400 bg-emerald-500/5';
@@ -246,7 +249,7 @@
 
       if (score >= 70) {
         colorClass = 'border-rose-500 text-rose-400 bg-rose-500/5';
-        title = 'HIGH EXPOSURE / RISK';
+        title = 'HIGH EXPOSURE / CRITICAL';
       } else if (score >= 35) {
         colorClass = 'border-amber-500 text-amber-400 bg-amber-500/5';
         title = 'MODERATE EXPOSURE';
@@ -291,38 +294,55 @@
 
         const wrapper = document.getElementById('findings-wrapper');
         const found = data.identity_results.filter(r => r.exists);
+
+        // Connected Handles & Web of Identity
+        let connectedHtml = '';
+        if (data.summary && data.summary.connected_handles && data.summary.connected_handles.length) {
+          connectedHtml = `
+            <div class="mb-6 p-4 rounded-lg bg-slate-900 border border-cyan-500/30">
+              <div class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-diagram-project"></i> Web of Identity: Cross-Referenced Handles Discovered
+              </div>
+              <div class="flex flex-wrap gap-2">
+                ${data.summary.connected_handles.map(h => `<span class="px-2.5 py-1 rounded bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-mono text-xs">${h}</span>`).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Profile Cards Grid
+        let cardsHtml = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+            ${found.map(r => `
+              <div class="p-4 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition">
+                <div class="flex items-start gap-3">
+                  ${r.avatar_url ? `<img src="${r.avatar_url}" class="w-11 h-11 rounded-full object-cover border border-cyan-500/30" onerror="this.style.display='none'">` : `<div class="w-11 h-11 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 font-bold"><i class="fa-regular fa-user"></i></div>`}
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-white text-sm truncate">${r.name || r.platform}</span>
+                      <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 uppercase">${r.category}</span>
+                    </div>
+                    <div class="text-xs text-slate-400 font-mono">${r.platform}</div>
+                    ${r.bio ? `<p class="text-xs text-slate-300 mt-1 line-clamp-2">${r.bio}</p>` : ''}
+                    <div class="mt-2 flex items-center justify-between">
+                      <a href="${r.url}" target="_blank" class="text-xs text-cyan-400 hover:underline flex items-center gap-1 font-mono truncate max-w-[200px]">
+                        ${r.url} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                      </a>
+                      <span class="text-[10px] text-slate-500">${r.response_time_ms}ms</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
         wrapper.innerHTML = `
           <div class="flex justify-between items-center mb-4">
             <h3 class="font-bold text-white text-base">Discovered Profiles (${found.length} / ${data.identity_results.length})</h3>
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
-              <thead class="text-xs uppercase text-slate-400 border-b border-cyber-border">
-                <tr>
-                  <th class="py-2.5">Platform</th>
-                  <th class="py-2.5">Category</th>
-                  <th class="py-2.5">Status</th>
-                  <th class="py-2.5">Profile URL</th>
-                  <th class="py-2.5 text-right">Latency</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${data.identity_results.map(r => `
-                  <tr class="hover:bg-slate-800/30">
-                    <td class="py-2.5 font-medium text-white">${r.platform}</td>
-                    <td class="py-2.5 text-xs text-slate-400 capitalize">${r.category}</td>
-                    <td class="py-2.5">
-                      ${r.exists ? '<span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">FOUND</span>' : '<span class="text-xs text-slate-600">Not Found</span>'}
-                    </td>
-                    <td class="py-2.5 font-mono text-xs">
-                      ${r.exists ? `<a href="${r.url}" target="_blank" class="text-cyan-400 hover:underline flex items-center gap-1">${r.url} <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>` : '-'}
-                    </td>
-                    <td class="py-2.5 text-right text-xs text-slate-400">${r.response_time_ms} ms</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
+          ${connectedHtml}
+          ${cardsHtml}
         `;
         document.getElementById('results-container').classList.remove('hidden');
       } catch (err) {
@@ -385,18 +405,54 @@
 
         const d = data.domain_results;
         const wrapper = document.getElementById('findings-wrapper');
+
+        let emailsHtml = '';
+        if (d.exposed_emails && d.exposed_emails.length) {
+          emailsHtml = `
+            <div class="mb-6 p-4 rounded-lg bg-slate-900 border border-yellow-500/30">
+              <div class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-envelope"></i> Exposed Corporate Emails Harvested (${d.exposed_emails.length})
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                ${d.exposed_emails.map(e => `<div class="p-2 rounded bg-slate-950 font-mono text-xs text-yellow-200">${e}</div>`).join('')}
+              </div>
+            </div>
+          `;
+        }
+
         wrapper.innerHTML = `
-          <h3 class="font-bold text-white text-base mb-4">DNS Records & Email Security</h3>
+          <h3 class="font-bold text-white text-base mb-4">DNS, Cloud & Security Intelligence</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-6">
+            <div class="p-3 bg-slate-900 rounded-lg">
+              <div class="text-xs text-slate-400">Cloud / CDN Provider</div>
+              <div class="font-bold text-cyan-400 mt-1">${d.cloud_provider || 'Bare Metal'}</div>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-lg">
+              <div class="text-xs text-slate-400">DMARC Enforcement</div>
+              <div class="font-medium text-white text-xs mt-1 truncate">${d.dmarc_grade}</div>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-lg">
+              <div class="text-xs text-slate-400">Email Spoofing Risk</div>
+              <div class="mt-1 font-semibold ${d.email_spoofable ? 'text-rose-400' : 'text-emerald-400'}">
+                ${d.email_spoofable ? 'VULNERABLE (Spoofable)' : 'PROTECTED'}
+              </div>
+            </div>
+          </div>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
             <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">IPv4 Addresses (A)</div><div class="font-mono text-cyan-400 mt-1">${d.ip_addresses.join(', ') || 'None'}</div></div>
             <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">MX Mail Servers</div><div class="font-mono text-white mt-1 text-xs truncate">${d.mx_records.join(', ') || 'None'}</div></div>
-            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">SPF Record</div><div class="font-mono text-xs text-slate-300 mt-1">${d.spf_record || 'Missing'}</div></div>
-            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Email Spoofing Vulnerability</div><div class="mt-1 font-semibold ${d.email_spoofable ? 'text-rose-400' : 'text-emerald-400'}">${d.email_spoofable ? 'VULNERABLE (Spoofable)' : 'PROTECTED (Strict DMARC)'}</div></div>
           </div>
-          ${d.discovered_subdomains && d.discovered_subdomains.length ? `
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Discovered Subdomains (${d.discovered_subdomains.length})</div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-              ${d.discovered_subdomains.map(s => `<div class="p-2 rounded bg-slate-900 font-mono text-xs text-cyan-300">${s}</div>`).join('')}
+
+          ${emailsHtml}
+
+          ${d.cert_transparency_subdomains && d.cert_transparency_subdomains.length ? `
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-scroll"></i> Certificate Transparency Subdomains (${d.cert_transparency_subdomains.length})
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-60 overflow-y-auto p-1">
+              ${d.cert_transparency_subdomains.map(s => `<div class="p-2 rounded bg-slate-900 font-mono text-xs text-cyan-300 truncate">${s}</div>`).join('')}
             </div>
           ` : ''}
         `;

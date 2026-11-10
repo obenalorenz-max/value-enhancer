@@ -31,21 +31,23 @@ flowchart TD
     Engine --> Output["Console Tables / Structured JSON / Interactive WebUI"]
 ```
 
-1. **👤 Identity Hunter (`identity`)**:
-   - Asynchronous multi-platform username scanner querying dozens of developer, social, publishing, and messaging platforms in parallel.
-   - Calculates exposure score based on active digital footprints.
+1. **👤 Identity Hunter (`identity`) - Maigret Architecture**:
+   - Asynchronous multi-platform profile scanner querying 35+ developer, gaming, social, and tech platforms in parallel.
+   - Deep metadata parser: extracts display names, bio descriptions, avatar photos, locations, and cross-referenced social handles (`@handle`).
+   - Maps the "Web of Identity" to discover interconnected accounts and calculate exposure scores.
 
-2. **📱 Carrier & Phone Recon (`phone`)**:
-   - Parses international telephone numbers using Google's libphonenumber standard.
-   - Detects telecom carriers, country locations, and line types (e.g., Mobile, Fixed Line, or VOIP/burner numbers).
+2. **📱 Carrier & Phone Recon (`phone`) - PhoneInfoga Architecture**:
+   - Parses international telephone numbers using Google's `libphonenumber` standard with default Alberta / Canadian regional parsing (`403`, `780`, `587`, `825`, `368`).
+   - Detects telecom carriers, wire centers, country locations, and line types (e.g., Mobile, Fixed Line, or VOIP burner numbers).
    - Generates targeted Google OSINT dorks for web presence correlation.
 
-3. **🌐 Domain & Infrastructure Intel (`domain`)**:
-   - Maps IPv4 (A), IPv6 (AAAA), Mail Exchangers (MX), and Name Servers (NS).
-   - Analyzes **SPF** and **DMARC** records to identify critical email spoofability risks.
-   - Fast asynchronous subdomain probing.
+3. **🌐 Domain & Infrastructure Recon (`domain`) - theHarvester Architecture**:
+   - Passive **Certificate Transparency (crt.sh)** harvesting: retrieves real active subdomains from historical and current SSL cert issuance logs.
+   - Exposed corporate email harvester via public PGP keyservers and DNS TXT/SOA records.
+   - Cloud & CDN Provider fingerprinting (Cloudflare, AWS CloudFront, Google Cloud, Azure, Fastly).
+   - Full DNS mapping (A, AAAA, MX, NS) and **DMARC / SPF Spoofability Grading** (A+ to F).
 
-4. **🔑 Secrets & Leaks Auditor (`secrets`)**:
+4. **🔑 Secrets & Leaks Auditor (`secrets`) - TruffleHog Architecture**:
    - Shannon Entropy analysis to detect high-entropy keys, passwords, and tokens.
    - Pattern matching for AWS keys, GitHub PATs, private certificates, Google API keys, Slack tokens, and JWTs.
    - Automatic secret masking to avoid plaintext terminal leaks.
@@ -53,6 +55,9 @@ flowchart TD
 5. **🗺️ EXIF & GPS Harvester (`metadata`)**:
    - Extracts camera hardware makes, models, software versions, and creation timestamps.
    - Decodes DMS GPS tags into decimal latitude/longitude with direct Google Maps links.
+
+6. **📁 Automated Reports (`reports/`)**:
+   - Every scan automatically generates a timestamped structured JSON dump and an executive Markdown summary in the `reports/` folder.
 
 ---
 
