@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Value-Enhancer | OSINT & Reconnaissance Intelligence Suite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              black: '#0a0d14',
+              card: '#111726',
+              border: '#1e293b',
+              accent: '#06b6d4',
+              neon: '#10b981',
+              alert: '#f43f5e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #07090e; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .glow-cyan { text-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+    .card-glass { background: rgba(17, 23, 38, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(30, 41, 59, 0.8); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0d14; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+  </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-cyber-border card-glass sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+          <i class="fa-solid fa-satellite-dish text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg tracking-wider text-white flex items-center gap-2">
+            VALUE-ENHANCER <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">v0.1.0</span>
+          </h1>
+          <p class="text-xs text-slate-400">Unified Digital Reconnaissance & OSINT Intelligence Suite</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Engine Online
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- Left Module Selector (4 cols) -->
+    <div class="lg:col-span-4 space-y-4">
+      <div class="card-glass rounded-xl p-4">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 px-2">Reconnaissance Vectors</h2>
+        <nav class="space-y-1.5">
+          <button onclick="switchTab('identity')" id="tab-identity" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+            <i class="fa-solid fa-fingerprint w-5 text-center text-base"></i>
+            <div class="text-left">
+              <div>Identity Hunter</div>
+              <div class="text-xs text-slate-400 font-normal">Maigret / Sherlock style multi-platform scanner</div>
+            </div>
+          </button>
+          <button onclick="switchTab('phone')" id="tab-phone" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
+            <i class="fa-solid fa-phone-volume w-5 text-center text-base"></i>
+            <div class="text-left">
+              <div>Carrier & Phone Recon</div>
+              <div class="text-xs text-slate-400 font-normal">PhoneInfoga carrier & line type analysis</div>
+            </div>
+          </button>
+          <button onclick="switchTab('domain')" id="tab-domain" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
+            <i class="fa-solid fa-globe w-5 text-center text-base"></i>
+            <div class="text-left">
+              <div>Domain & Infrastructure</div>
+              <div class="text-xs text-slate-400 font-normal">theHarvester DNS, subdomains & email spoofing</div>
+            </div>
+          </button>
+          <button onclick="switchTab('secrets')" id="tab-secrets" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
+            <i class="fa-solid fa-key w-5 text-center text-base"></i>
+            <div class="text-left">
+              <div>Secrets & Leaks Auditor</div>
+              <div class="text-xs text-slate-400 font-normal">TruffleHog entropy & token scanner</div>
+            </div>
+          </button>
+          <button onclick="switchTab('metadata')" id="tab-metadata" class="tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50">
+            <i class="fa-solid fa-location-crosshairs w-5 text-center text-base"></i>
+            <div class="text-left">
+              <div>EXIF & GPS Harvester</div>
+              <div class="text-xs text-slate-400 font-normal">Image camera metadata & coordinate extractor</div>
+            </div>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Quick Info / Status Card -->
+      <div class="card-glass rounded-xl p-4 text-xs text-slate-400 space-y-2">
+        <div class="flex justify-between items-center text-slate-300 font-medium">
+          <span>Local Engine Status</span>
+          <span class="text-cyan-400">Low-Spec Optimized</span>
+        </div>
+        <p>Runs asynchronously in user space with minimal memory overhead (&lt;60MB RAM). Safe for low-spec Windows 11 hardware.</p>
+      </div>
+    </div>
+
+    <!-- Right Workspace Area (8 cols) -->
+    <div class="lg:col-span-8 space-y-6">
+
+      <!-- Dynamic Input Card -->
+      <div class="card-glass rounded-xl p-6">
+        <h2 id="view-title" class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+          <i class="fa-solid fa-fingerprint text-cyan-400"></i> Identity Hunter
+        </h2>
+        <p id="view-desc" class="text-sm text-slate-400 mb-6">Enter a handle or username to search across developer, social, and technical platforms.</p>
+
+        <!-- Form for Identity -->
+        <div id="form-identity" class="tab-form space-y-4">
+          <div class="flex gap-2">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">@</span>
+              <input type="text" id="input-username" placeholder="e.g. torvalds, obenalorenz-max" class="w-full pl-8 pr-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+            </div>
+            <button onclick="runIdentityScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-bolt"></i> Scan Footprint
+            </button>
+          </div>
+        </div>
+
+        <!-- Form for Phone -->
+        <div id="form-phone" class="tab-form hidden space-y-4">
+          <div class="flex gap-2">
+            <input type="text" id="input-phone" placeholder="e.g. +639171234567, +14155552671" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+            <button onclick="runPhoneScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-magnifying-glass"></i> Analyze Phone
+            </button>
+          </div>
+        </div>
+
+        <!-- Form for Domain -->
+        <div id="form-domain" class="tab-form hidden space-y-4">
+          <div class="flex gap-2">
+            <input type="text" id="input-domain" placeholder="e.g. github.com, cloudflare.com" class="flex-1 px-4 py-2.5 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm">
+            <button onclick="runDomainScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-network-wired"></i> Map Domain
+            </button>
+          </div>
+        </div>
+
+        <!-- Form for Secrets -->
+        <div id="form-secrets" class="tab-form hidden space-y-4">
+          <textarea id="input-secrets" rows="4" placeholder="Paste code snippet, git diff, or configuration text to check for leaked API keys, AWS tokens, and high-entropy secrets..." class="w-full p-3 bg-slate-900 border border-cyber-border rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm font-mono"></textarea>
+          <div class="flex justify-end">
+            <button onclick="runSecretsScan()" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved"></i> Audit Snippet
+            </button>
+          </div>
+        </div>
+
+        <!-- Form for Metadata -->
+        <div id="form-metadata" class="tab-form hidden space-y-4">
+          <div class="border-2 border-dashed border-cyber-border hover:border-cyan-500 rounded-xl p-6 text-center transition cursor-pointer" onclick="document.getElementById('input-image').click()">
+            <i class="fa-regular fa-image text-3xl text-slate-500 mb-2"></i>
+            <p class="text-sm font-medium text-slate-300">Click to upload image (JPEG/TIFF/PNG)</p>
+            <p class="text-xs text-slate-500">Extracts camera specs, software, and embedded GPS coordinates</p>
+            <input type="file" id="input-image" accept="image/*" class="hidden" onchange="runMetadataScan(this.files[0])">
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-spinner" class="hidden card-glass rounded-xl p-8 text-center space-y-3">
+        <div class="w-10 h-10 border-4 border-cyan-500/30 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+        <p class="text-sm text-cyan-400 font-medium animate-pulse">Running asynchronous reconnaissance scan...</p>
+      </div>
+
+      <!-- Results Display Container -->
+      <div id="results-container" class="hidden space-y-6">
+        <!-- Risk & Exposure Banner -->
+        <div id="risk-banner" class="card-glass rounded-xl p-5 border-l-4">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Findings Table / Cards -->
+        <div id="findings-wrapper" class="card-glass rounded-xl p-6">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    let currentTab = 'identity';
+
+    const tabConfig = {
+      identity: { title: 'Identity Hunter', icon: 'fa-fingerprint', desc: 'Scan digital footprint & discover public accounts matching a username.' },
+      phone: { title: 'Carrier & Phone Recon', icon: 'fa-phone-volume', desc: 'Extract carrier details, line type (VOIP vs Mobile), and Google OSINT footprint.' },
+      domain: { title: 'Domain & Infrastructure', icon: 'fa-globe', desc: 'Enumerate DNS, active subdomains, and assess email spoofability (SPF/DMARC).' },
+      secrets: { title: 'Secrets & Leaks Auditor', icon: 'fa-key', desc: 'Scan code snippets or configs for AWS keys, private certs, and high-entropy tokens.' },
+      metadata: { title: 'EXIF & GPS Harvester', icon: 'fa-location-crosshairs', desc: 'Extract hidden device specs, timestamps, and GPS coordinates from photos.' }
+    };
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.className = 'tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition text-slate-300 hover:bg-slate-800/50';
+      });
+      document.getElementById('tab-' + tabId).className = 'tab-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition bg-cyan-500/10 text-cyan-400 border border-cyan-500/30';
+
+      document.querySelectorAll('.tab-form').forEach(f => f.classList.add('hidden'));
+      document.getElementById('form-' + tabId).classList.remove('hidden');
+
+      const conf = tabConfig[tabId];
+      document.getElementById('view-title').innerHTML = `<i class="fa-solid ${conf.icon} text-cyan-400"></i> ${conf.title}`;
+      document.getElementById('view-desc').innerText = conf.desc;
+
+      document.getElementById('results-container').classList.add('hidden');
+    }
+
+    function showLoading() {
+      document.getElementById('loading-spinner').classList.remove('hidden');
+      document.getElementById('results-container').classList.add('hidden');
+    }
+
+    function hideLoading() {
+      document.getElementById('loading-spinner').classList.add('hidden');
+    }
+
+    function renderRiskBanner(report) {
+      const banner = document.getElementById('risk-banner');
+      const score = report.risk_score || 0;
+      let colorClass = 'border-emerald-500 text-emerald-400 bg-emerald-500/5';
+      let title = 'LOW EXPOSURE';
+
+      if (score >= 70) {
+        colorClass = 'border-rose-500 text-rose-400 bg-rose-500/5';
+        title = 'HIGH EXPOSURE / RISK';
+      } else if (score >= 35) {
+        colorClass = 'border-amber-500 text-amber-400 bg-amber-500/5';
+        title = 'MODERATE EXPOSURE';
+      }
+
+      banner.className = `card-glass rounded-xl p-5 border-l-4 ${colorClass}`;
+      let factorsHtml = '';
+      if (report.risk_factors && report.risk_factors.length > 0) {
+        factorsHtml = `<ul class="mt-3 space-y-1 text-xs text-slate-300">
+          ${report.risk_factors.map(f => `<li class="flex items-start gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i> ${f}</li>`).join('')}
+        </ul>`;
+      }
+
+      banner.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-xs uppercase tracking-wider font-semibold opacity-75">${title}</div>
+            <div class="text-2xl font-black mt-0.5">${score} <span class="text-sm font-normal text-slate-400">/ 100</span></div>
+          </div>
+          <div class="text-xs text-slate-400 text-right">
+            <div>Target: <span class="font-mono text-white">${report.target}</span></div>
+            <div>Time: ${report.execution_time_seconds}s</div>
+          </div>
+        </div>
+        ${factorsHtml}
+      `;
+    }
+
+    async function runIdentityScan() {
+      const username = document.getElementById('input-username').value.trim();
+      if (!username) return alert('Please enter a username.');
+      showLoading();
+      try {
+        const res = await fetch('/api/scan/identity', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username })
+        });
+        const data = await res.json();
+        hideLoading();
+        renderRiskBanner(data);
+
+        const wrapper = document.getElementById('findings-wrapper');
+        const found = data.identity_results.filter(r => r.exists);
+        wrapper.innerHTML = `
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-white text-base">Discovered Profiles (${found.length} / ${data.identity_results.length})</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="text-xs uppercase text-slate-400 border-b border-cyber-border">
+                <tr>
+                  <th class="py-2.5">Platform</th>
+                  <th class="py-2.5">Category</th>
+                  <th class="py-2.5">Status</th>
+                  <th class="py-2.5">Profile URL</th>
+                  <th class="py-2.5 text-right">Latency</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${data.identity_results.map(r => `
+                  <tr class="hover:bg-slate-800/30">
+                    <td class="py-2.5 font-medium text-white">${r.platform}</td>
+                    <td class="py-2.5 text-xs text-slate-400 capitalize">${r.category}</td>
+                    <td class="py-2.5">
+                      ${r.exists ? '<span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">FOUND</span>' : '<span class="text-xs text-slate-600">Not Found</span>'}
+                    </td>
+                    <td class="py-2.5 font-mono text-xs">
+                      ${r.exists ? `<a href="${r.url}" target="_blank" class="text-cyan-400 hover:underline flex items-center gap-1">${r.url} <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>` : '-'}
+                    </td>
+                    <td class="py-2.5 text-right text-xs text-slate-400">${r.response_time_ms} ms</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+        document.getElementById('results-container').classList.remove('hidden');
+      } catch (err) {
+        hideLoading();
+        alert('Scan failed: ' + err.message);
+      }
+    }
+
+    async function runPhoneScan() {
+      const phone = document.getElementById('input-phone').value.trim();
+      if (!phone) return alert('Please enter a phone number.');
+      showLoading();
+      try {
+        const res = await fetch('/api/scan/phone', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+        hideLoading();
+        renderRiskBanner(data);
+
+        const p = data.phone_results;
+        const wrapper = document.getElementById('findings-wrapper');
+        wrapper.innerHTML = `
+          <h3 class="font-bold text-white text-base mb-4">Carrier & Telephony Intelligence</h3>
+          <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">E.164 Format</div><div class="font-mono text-cyan-400 mt-1">${p.e164 || '-'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Carrier</div><div class="font-medium text-white mt-1">${p.carrier || 'Unknown'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Line Type</div><div class="font-medium text-white mt-1">${p.line_type || 'Unknown'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Location / Region</div><div class="font-medium text-white mt-1">${p.location || p.region_code || 'Unknown'}</div></div>
+          </div>
+          ${p.google_dorks ? `
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Automated Footprint Dorks</div>
+            <div class="space-y-1.5">
+              ${p.google_dorks.map(d => `<a href="${d}" target="_blank" class="block p-2 rounded bg-slate-900/60 hover:bg-slate-800 text-xs text-cyan-400 hover:underline truncate">${d}</a>`).join('')}
+            </div>
+          ` : ''}
+        `;
+        document.getElementById('results-container').classList.remove('hidden');
+      } catch (err) {
+        hideLoading();
+        alert('Phone scan failed: ' + err.message);
+      }
+    }
+
+    async function runDomainScan() {
+      const domain = document.getElementById('input-domain').value.trim();
+      if (!domain) return alert('Please enter a domain.');
+      showLoading();
+      try {
+        const res = await fetch('/api/scan/domain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domain })
+        });
+        const data = await res.json();
+        hideLoading();
+        renderRiskBanner(data);
+
+        const d = data.domain_results;
+        const wrapper = document.getElementById('findings-wrapper');
+        wrapper.innerHTML = `
+          <h3 class="font-bold text-white text-base mb-4">DNS Records & Email Security</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">IPv4 Addresses (A)</div><div class="font-mono text-cyan-400 mt-1">${d.ip_addresses.join(', ') || 'None'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">MX Mail Servers</div><div class="font-mono text-white mt-1 text-xs truncate">${d.mx_records.join(', ') || 'None'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">SPF Record</div><div class="font-mono text-xs text-slate-300 mt-1">${d.spf_record || 'Missing'}</div></div>
+            <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Email Spoofing Vulnerability</div><div class="mt-1 font-semibold ${d.email_spoofable ? 'text-rose-400' : 'text-emerald-400'}">${d.email_spoofable ? 'VULNERABLE (Spoofable)' : 'PROTECTED (Strict DMARC)'}</div></div>
+          </div>
+          ${d.discovered_subdomains && d.discovered_subdomains.length ? `
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Discovered Subdomains (${d.discovered_subdomains.length})</div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+              ${d.discovered_subdomains.map(s => `<div class="p-2 rounded bg-slate-900 font-mono text-xs text-cyan-300">${s}</div>`).join('')}
+            </div>
+          ` : ''}
+        `;
+        document.getElementById('results-container').classList.remove('hidden');
+      } catch (err) {
+        hideLoading();
+        alert('Domain scan failed: ' + err.message);
+      }
+    }
+
+    async function runSecretsScan() {
+      const text = document.getElementById('input-secrets').value.trim();
+      if (!text) return alert('Please paste some text to audit.');
+      showLoading();
+      try {
+        const res = await fetch('/api/scan/secrets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+        hideLoading();
+        renderRiskBanner(data);
+
+        const sec = data.secret_results;
+        const wrapper = document.getElementById('findings-wrapper');
+        if (!sec.length) {
+          wrapper.innerHTML = `<div class="text-center py-8 text-emerald-400"><i class="fa-solid fa-circle-check text-4xl mb-2"></i><div class="font-bold">No Leaked Credentials Detected</div><p class="text-xs text-slate-400 mt-1">Snippet passed entropy and secret pattern audit.</p></div>`;
+        } else {
+          wrapper.innerHTML = `
+            <h3 class="font-bold text-white text-base mb-4 text-rose-400">Detected Credentials (${sec.length})</h3>
+            <div class="space-y-3">
+              ${sec.map(s => `
+                <div class="p-3 bg-slate-900 rounded-lg border border-rose-500/30 flex justify-between items-center">
+                  <div>
+                    <div class="font-bold text-sm text-white">${s.description} <span class="text-xs px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 ml-2 font-mono">${s.severity}</span></div>
+                    <div class="font-mono text-xs text-cyan-400 mt-1">${s.matched_snippet}</div>
+                  </div>
+                  <div class="text-right text-xs text-slate-400">
+                    <div>Line ${s.line_number}</div>
+                    <div>Entropy: ${s.entropy}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+        document.getElementById('results-container').classList.remove('hidden');
+      } catch (err) {
+        hideLoading();
+        alert('Secrets scan failed: ' + err.message);
+      }
+    }
+
+    async function runMetadataScan(file) {
+      if (!file) return;
+      showLoading();
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await fetch('/api/scan/metadata', { method: 'POST', body: formData });
+        const data = await res.json();
+        hideLoading();
+        renderRiskBanner(data);
+
+        const m = data.metadata_results[0];
+        const wrapper = document.getElementById('findings-wrapper');
+        if (!m.has_exif) {
+          wrapper.innerHTML = `<div class="text-center py-8 text-slate-400"><i class="fa-regular fa-image text-4xl mb-2"></i><div class="font-bold text-white">No EXIF Metadata Found</div><p class="text-xs text-slate-500 mt-1">This image has been stripped or contains no camera/GPS tags.</p></div>`;
+        } else {
+          wrapper.innerHTML = `
+            <h3 class="font-bold text-white text-base mb-4">Image Metadata & Geolocation</h3>
+            <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+              <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Device Hardware</div><div class="font-medium text-white mt-1">${m.make || 'Unknown'} ${m.model || ''}</div></div>
+              <div class="p-3 bg-slate-900 rounded-lg"><div class="text-xs text-slate-400">Timestamp</div><div class="font-medium text-white mt-1">${m.datetime_original || 'Unknown'}</div></div>
+              <div class="p-3 bg-slate-900 rounded-lg col-span-2">
+                <div class="text-xs text-slate-400">GPS Coordinates</div>
+                ${m.latitude ? `
+                  <div class="text-rose-400 font-mono font-bold mt-1">${m.latitude}, ${m.longitude} (Alt: ${m.altitude || 0}m)</div>
+                  <a href="${m.maps_link}" target="_blank" class="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 text-xs font-semibold">
+                    <i class="fa-solid fa-map-location-dot"></i> Open Exact Location in Google Maps
+                  </a>
+                ` : '<div class="text-slate-500 mt-1 text-xs">No embedded GPS coordinates</div>'}
+              </div>
+            </div>
+          `;
+        }
+        document.getElementById('results-container').classList.remove('hidden');
+      } catch (err) {
+        hideLoading();
+        alert('Metadata scan failed: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
