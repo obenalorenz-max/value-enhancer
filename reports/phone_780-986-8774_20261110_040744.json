@@ -1,0 +1,43 @@
+{
+  "target": "780-986-8774",
+  "target_type": "phone",
+  "generated_at": "2026-11-10T04:07:44.825459",
+  "execution_time_seconds": 0.0,
+  "summary": {
+    "valid": true,
+    "e164": "+17809868774",
+    "carrier": null,
+    "line_type": "Fixed Line / Mobile",
+    "location": "Leduc, AB • Edmonton & Northern Alberta (Fort McMurray, Grande Prairie, St. Albert)"
+  },
+  "identity_results": [],
+  "phone_results": {
+    "raw_input": "780-986-8774",
+    "valid": true,
+    "possible": true,
+    "e164": "+17809868774",
+    "international": "+1 780-986-8774",
+    "national": "(780) 986-8774",
+    "country_code": 1,
+    "region_code": "CA",
+    "location": "Leduc, AB • Edmonton & Northern Alberta (Fort McMurray, Grande Prairie, St. Albert)",
+    "carrier": null,
+    "line_type": "Fixed Line / Mobile",
+    "timezone": "America/Edmonton",
+    "google_dorks": [
+      "https://www.google.com/search?q=%22780-986-8774%22",
+      "https://www.google.com/search?q=site%3Afacebook.com%20%22780-986-8774%22",
+      "https://www.google.com/search?q=site%3Ainstagram.com%20%22780-986-8774%22",
+      "https://www.google.com/search?q=site%3Alinkedin.com%20%22780-986-8774%22",
+      "https://www.google.com/search?q=site%3Apastebin.com%20%22780-986-8774%22",
+      "https://www.google.com/search?q=%22%2B17809868774%22",
+      "https://www.google.com/search?q=site%3At.me%20%22%2B17809868774%22",
+      "https://www.google.com/search?q=site%3Awhatsapp.com%20%22%2B17809868774%22"
+    ]
+  },
+  "secret_results": [],
+  "domain_results": null,
+  "metadata_results": [],
+  "risk_score": 35,
+  "risk_factors": []
+}

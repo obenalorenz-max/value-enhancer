@@ -1,0 +1,80 @@
+{
+  "target": "alberta.ca",
+  "target_type": "domain",
+  "generated_at": "2026-11-10T04:07:52.986326",
+  "execution_time_seconds": 2.41,
+  "summary": {
+    "ips": [
+      "142.229.246.30",
+      "142.229.226.127"
+    ],
+    "cloud_provider": "Cloudflare Edge",
+    "dmarc_grade": "Grade F (Monitoring Only 'p=none' - Spoofable)",
+    "spoofable": true,
+    "exposed_emails": [],
+    "subdomains_count": 7,
+    "cert_transparency_count": 0
+  },
+  "identity_results": [],
+  "phone_results": null,
+  "secret_results": [],
+  "domain_results": {
+    "domain": "alberta.ca",
+    "ip_addresses": [
+      "142.229.246.30",
+      "142.229.226.127"
+    ],
+    "ipv6_addresses": [],
+    "mx_records": [
+      "0 alberta-ca.mail.protection.outlook.com.",
+      "10 mail2.alberta.ca.",
+      "10 mail1.alberta.ca."
+    ],
+    "txt_records": [
+      "MS=ms40279064",
+      "google-gws-recovery-domain-verification=57820639",
+      "google-site-verification=4zlGfFmHBDdsmw2h96fsfpwvUTQ6JDb3FXsWmLuIybg",
+      "google-site-verification=46Y6GMJCjUwsR8GDXHB8c-Zhib5laKNSBJkahPo3nGI",
+      "ms-domain-verification=efac9c34-eafb-4e6b-999a-474106672359",
+      "google-site-verification=4gVCIApdm5Vq_0OxXRDAwRwA3XPMHtDuaVDikRaX0C4",
+      "_r2nfnygdzcrb46orrs5fzmrgg264wim",
+      "_ghd5ze4didyjlkmosuyzttv3bkawfrp",
+      "v=spf1 include:spf.protection.outlook.com ip4:142.229.229.8 ip4:142.229.229.9 ip4:142.229.240.85 ip4:142.229.240.86 -all",
+      "google-site-verification=dBCIJfKg5oC84vdeiSfuEOf97EpYvLTqXuaGX_VldAU"
+    ],
+    "name_servers": [
+      "is-dns1.gov.ab.ca.",
+      "is-dns3-node2.",
+      "is-dns3-node1."
+    ],
+    "spf_record": "v=spf1 include:spf.protection.outlook.com ip4:142.229.229.8 ip4:142.229.229.9 ip4:142.229.240.85 ip4:142.229.240.86 -all",
+    "dmarc_record": "v=DMARC1; p=none; rua=mailto:dmarc@gov.ab.ca,mailto:dmarc_agg@vali.email;",
+    "email_spoofable": true,
+    "dmarc_grade": "Grade F (Monitoring Only 'p=none' - Spoofable)",
+    "cloud_provider": "Cloudflare Edge",
+    "server_banner": "cloudflare",
+    "security_headers": {
+      "Strict-Transport-Security": true,
+      "Content-Security-Policy": false,
+      "X-Frame-Options": true,
+      "X-Content-Type-Options": true
+    },
+    "exposed_emails": [],
+    "cert_transparency_subdomains": [],
+    "discovered_subdomains": [
+      "api.alberta.ca",
+      "dev.alberta.ca",
+      "internal.alberta.ca",
+      "secure.alberta.ca",
+      "support.alberta.ca",
+      "test.alberta.ca",
+      "www.alberta.ca"
+    ]
+  },
+  "metadata_results": [],
+  "risk_score": 65,
+  "risk_factors": [
+    "CRITICAL EMAIL SPOOFING: Grade F (Monitoring Only 'p=none' - Spoofable). Attackers can forge emails from @alberta.ca.",
+    "Missing HTTP Security Headers: Content-Security-Policy."
+  ]
+}

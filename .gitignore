@@ -47,6 +47,4 @@ htmlcov/
 Thumbs.db
 
 # Output & Reports
-reports/*
-!reports/.gitkeep
 *.log
