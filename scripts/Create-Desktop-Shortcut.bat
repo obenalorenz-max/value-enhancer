@@ -1,62 +1,74 @@
 @echo off
 setlocal enabledelayedexpansion
-title Magpie - Create Desktop Shortcut
+title Magpie FSR Upscaler - Auto Setup & Shortcut Creator
 
-echo =======================================================
-echo     Magpie FSR Upscaler - Desktop Shortcut Creator
-echo =======================================================
+echo ======================================================================
+echo       Magpie FSR Upscaler - Auto Installer & Shortcut Creator
+echo       Destination: %USERPROFILE%\Documents\Magpie
+echo ======================================================================
 echo.
 
-:: 1. Search for Magpie.exe in common locations
-set "MAGPIE_PATH="
+set "TARGET_DIR=%USERPROFILE%\Documents\Magpie"
+set "EXE_PATH=%TARGET_DIR%\Magpie.exe"
+set "ZIP_PATH=%TARGET_DIR%\Magpie.zip"
+set "DOWNLOAD_URL=https://github.com/Blinue/Magpie/releases/download/v0.13.0/Magpie-v0.13.0-x64.zip"
 
-if exist "%~dp0Magpie.exe" (
-    set "MAGPIE_PATH=%~dp0Magpie.exe"
-) else if exist "%USERPROFILE%\Downloads\Magpie\Magpie.exe" (
-    set "MAGPIE_PATH=%USERPROFILE%\Downloads\Magpie\Magpie.exe"
-) else (
-    for /d %%D in ("%USERPROFILE%\Downloads\Magpie*") do (
-        if exist "%%D\Magpie.exe" set "MAGPIE_PATH=%%D\Magpie.exe"
+if not exist "%TARGET_DIR%" mkdir "%TARGET_DIR%"
+
+:: Check if Magpie.exe already exists
+if not exist "%EXE_PATH%" (
+    echo [*] Magpie not found locally.
+    echo [*] Downloading Magpie-v0.13.0-x64 from GitHub directly to:
+    echo     %TARGET_DIR%
+    echo.
+    powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; " ^
+        "Invoke-WebRequest -Uri '%DOWNLOAD_URL%' -OutFile '%ZIP_PATH%'; " ^
+        "Expand-Archive -Path '%ZIP_PATH%' -DestinationPath '%TARGET_DIR%' -Force; " ^
+        "Remove-Item -Force '%ZIP_PATH%'"
+)
+
+if not exist "%EXE_PATH%" (
+    :: In case files extracted into a subfolder
+    for /r "%TARGET_DIR%" %%F in (Magpie.exe) do (
+        if exist "%%F" set "EXE_PATH=%%F"
     )
 )
 
-:: 2. If not found automatically, prompt user to drag and drop Magpie.exe
-if "%MAGPIE_PATH%"=="" (
-    echo [!] Magpie.exe not found automatically in Downloads folder.
-    echo.
-    echo Please drag and drop your 'Magpie.exe' file into this window and press ENTER:
-    set /p "MAGPIE_PATH=> "
-    set "MAGPIE_PATH=!MAGPIE_PATH:"=!"
-)
-
-if not exist "!MAGPIE_PATH!" (
-    echo.
-    echo [ERROR] The path "!MAGPIE_PATH!" does not exist.
+if not exist "%EXE_PATH%" (
+    echo [ERROR] Failed to locate Magpie.exe. Please check internet connection.
     pause
     exit /b 1
 )
 
-:: 3. Create Windows Desktop Shortcut via PowerShell WScript.Shell
 echo.
-echo [*] Found Magpie at: "!MAGPIE_PATH!"
-echo [*] Creating shortcut on your Windows 11 Desktop...
+echo [*] Magpie located at: "%EXE_PATH%"
+echo [*] Creating shortcuts on Desktop and Documents...
 
 powershell -NoProfile -Command ^
   "$ws = New-Object -ComObject WScript.Shell; " ^
-  "$s = $ws.CreateShortcut([IO.Path]::Combine([Environment]::GetFolderPath('Desktop'), 'Magpie (FSR Upscaler).lnk')); " ^
-  "$s.TargetPath = '!MAGPIE_PATH!'; " ^
-  "$s.WorkingDirectory = [IO.Path]::GetDirectoryName('!MAGPIE_PATH!'); " ^
-  "$s.Description = 'Magpie Windowed FSR Upscaler for BlueStacks and Games'; " ^
-  "$s.Save()"
+  "$desk = [Environment]::GetFolderPath('Desktop'); " ^
+  "$doc = [Environment]::GetFolderPath('MyDocuments'); " ^
+  "$s1 = $ws.CreateShortcut([IO.Path]::Combine($desk, 'Magpie (FSR Upscaler).lnk')); " ^
+  "$s1.TargetPath = '!EXE_PATH!'; " ^
+  "$s1.WorkingDirectory = [IO.Path]::GetDirectoryName('!EXE_PATH!'); " ^
+  "$s1.Description = 'Magpie Windowed FSR Upscaler for BlueStacks MLBB'; " ^
+  "$s1.Save(); " ^
+  "$s2 = $ws.CreateShortcut([IO.Path]::Combine($doc, 'Magpie (FSR Upscaler).lnk')); " ^
+  "$s2.TargetPath = '!EXE_PATH!'; " ^
+  "$s2.WorkingDirectory = [IO.Path]::GetDirectoryName('!EXE_PATH!'); " ^
+  "$s2.Description = 'Magpie Windowed FSR Upscaler for BlueStacks MLBB'; " ^
+  "$s2.Save();"
 
-if %ERRORLEVEL% EQU 0 (
-    echo.
-    echo [SUCCESS] Shortcut 'Magpie (FSR Upscaler)' created on your Desktop!
-    echo Hotkey reminder: Press [Win + Shift + A] while BlueStacks MLBB is open.
-) else (
-    echo.
-    echo [ERROR] Failed to create shortcut.
-)
-
+echo.
+echo ======================================================================
+echo  [SUCCESS] Magpie Shortcuts Created:
+echo    1. %USERPROFILE%\Desktop\Magpie (FSR Upscaler).lnk
+echo    2. %USERPROFILE%\Documents\Magpie (FSR Upscaler).lnk
+echo.
+echo  Installed Path: %EXE_PATH%
+echo.
+echo  Hotkey Reminder: Press [Win + Shift + A] while MLBB is active!
+echo ======================================================================
 echo.
 pause
